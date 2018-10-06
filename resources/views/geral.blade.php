@@ -51,13 +51,11 @@
         background:#fff;
     }
 
-    .ordemServico{
+    .ordemServico,.pos{
         margin-top:50px;
     }
 
-    .btn{
-        margin-left:750px;        
-    }
+
 
 
 </style>
@@ -84,41 +82,34 @@
 
     <div id="test1" class="col s12">
 
-        <div class="container" id="divCenter">
-
-<div class="scrollInfos">   
-
-    @foreach($registros as $registro)
-    <ul class="collapsible">
-
-        <li>
-            <div class="collapsible-header">
-            <p><i class="material-icons">event</i>Informações</p>  
-
-                @if ($registro['created_at']->format('Y-m-d') === date('Y-m-d'))
-                    <span class="new badge" data-badge-caption="New"></span></div>
-                        <div class="collapsible-body">     
-                            <p><i class="material-icons">date_range</i>    Data Agendada: {{ $registro['date'] }}</p>           
-                            <p><i class="material-icons">alarm_on</i>    Horário Agendado: {{ $registro['time'] }}</p>
-                        </div>
-                    </li>
-                </ul>
-
-                @else
-                    <span class="" data-badge-caption=""></span></div>
-                        <div class="collapsible-body">     
-                            <p><i class="material-icons">date_range</i>    Data Agendada: {{ $registro['date'] }}</p>           
-                            <p><i class="material-icons">alarm_on</i>    Horário Agendado: {{ $registro['time'] }}</p>
-                        </div>
+    <ul class="collection with-header pos">
+             <li class="collection-header center">
+                <h5>Seus agendamentos estão disponíveis para consulta, logo abaixo: </h5>
+            </li>
             
-                    </li>
-                </ul> 
-                 @endif
-    @endforeach
+            <table class="highlight">
+                    <thead>
+                    <tr>
+                        <th>Código Agendamento</th>
+                        <th>Data Agendada</th>
+                        <th>Horário Agendado</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
 
-    </div>
-</div>
-        
+                    <tbody>
+                    @foreach($registros as $registro)
+                    <tr>
+                        <td> {{ $registro['id'] }}</td>
+                        <td><p><i class="material-icons">date_range</i>     {{ $registro['date'] }}</p></td>
+                        <td><p><i class="material-icons">alarm_on</i>     {{ $registro['time'] }}</p></td>                           
+                        <td><a href="{{ route('agendamento.deletar',$registro->id) }}" class="secondary-content left"><i class="material-icons">delete</i></a></td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+            </table>
+      </ul>
+       
     </div>
 
 
@@ -183,7 +174,6 @@
             </li>
         </ul>
 
-
     </div>
 
 
@@ -222,9 +212,6 @@
 
     </script>
 
-    <script>
-        function myFunction() {
-            document.getElementById("btn1").innerHTML = "Hello World";
-        }
-    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 

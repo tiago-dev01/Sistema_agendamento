@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', ['as'=>'create_user','uses'=>'HomeController@index']);
 
+Route::get('/agendamento/deletar/{id}',['as'=>'agendamento.deletar','uses'=>'LoginController@deletar']);
+
 
 Route::get('/agendamento',['as'=>'agendamento', function() {
     return view('agendar');

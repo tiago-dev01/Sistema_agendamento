@@ -48,4 +48,10 @@ class LoginController extends Controller
             return view('geral',compact('registros'));
     }
 
+    public function deletar($id)
+    {
+        Agendar::find($id)->delete();
+        return redirect('/');
+    }
+
 }
