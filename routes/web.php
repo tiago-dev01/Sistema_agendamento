@@ -22,11 +22,13 @@ Route::get('/home', ['as'=>'create_user','uses'=>'HomeController@index']);
 Route::get('/agendamento/deletar/{id}',['as'=>'agendamento.deletar','uses'=>'LoginController@deletar']);
 
 
+
 Route::get('/agendamento',['as'=>'agendamento', function() {
     return view('agendar');
 }])->middleware('auth');
 
 Route::post('/agendamento/gravar',['as'=>'agendar', 'uses'=>'LoginController@SalvarData'])->middleware('auth');
 
+Route::get('/',['as'=>'start','uses'=>'LoginController@index'])->middleware('auth');
 Route::get('/',['as'=>'start','uses'=>'LoginController@index'])->middleware('auth');
 

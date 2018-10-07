@@ -15,12 +15,10 @@ class CreatePartsTable extends Migration
     {
         Schema::create('parts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_user');
             $table->char('part_name', 50);
             $table->decimal('price', 5, 2);
             $table->integer('amount_stock');
-
-            $table->foreign('id_user')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }

@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Agendar;
 use Illuminate\Support\Facades\Auth;
 
+use DB;
+
 
 class LoginController extends Controller
 {
@@ -45,7 +47,16 @@ class LoginController extends Controller
                 }
             }
 
-            return view('geral',compact('registros'));
+            $regs = DB::table('service_orders')      
+                    ->join('users', 'users.id', '=', 'service_orders.id_user')
+                    ->join('parts', 'users.id', '=', 'service_orders.id_parts')
+                    ->select('service_orders.id_service_orders', 'parts.part_name', 'parts.price')
+                    ->get();
+
+
+            return view('geral', ['regs' => $regs])->with(compact('registros'));
+                                
+
     }
 
     public function deletar($id)

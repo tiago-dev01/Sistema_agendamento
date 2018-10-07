@@ -126,27 +126,21 @@
                     <thead>
                     <tr>
                         <th>Nome do Item</th>
-                        <th>Quantidade</th>
                         <th>Preço por Item</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>Jogo de velas NGK</td>
-                        <td>4</td>
-                        <td>R$87,5</td>
-                    </tr>
-                    <tr>
-                        <td>Limpeza de bicos</td>
-                        <td>1</td>
-                        <td>R$100,00</td>
-                    </tr>
-                    <tr>
-                        <td>Bomba de gasolina</td>
-                        <td>1</td>
-                        <td>R$218.00</td>
-                    </tr>
+                    
+                    @foreach($regs as $key => $data)
+                        
+                        <tr>
+                            <td>{{ $data->part_name }}</td>
+                            <td>{{ $data->price }}</td>
+                        </tr>
+
+                    @endforeach
+
                     </tbody>
                 </table>
 
@@ -164,14 +158,6 @@
             </span> </div>
             </li>
 
-            <li>
-            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
         </ul>
 
     </div>
