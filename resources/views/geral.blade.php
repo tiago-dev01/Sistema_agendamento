@@ -115,7 +115,7 @@
 
     <div id="test2" class="col s12">
 
-
+    
         <ul class="collapsible ordemServico">
             <li>
             <div class="collapsible-header"><i class="material-icons">traffic</i>Ordem de Serviço</div>
@@ -125,6 +125,7 @@
                 <table class="highlight">
                     <thead>
                     <tr>
+                        <th>Id_OS</th>
                         <th>Nome do Item</th>
                         <th>Preço por Item</th>
                     </tr>
@@ -133,8 +134,9 @@
                     <tbody>
                     
                     @foreach($regs as $key => $data)
-                        
+
                         <tr>
+                            <td>{{ $data->ordem_servico }}</td>
                             <td>{{ $data->part_name }}</td>
                             <td>{{ $data->price }}</td>
                         </tr>

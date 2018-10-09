@@ -14,7 +14,8 @@ class CreateServiceOrdersTable extends Migration
     public function up()
     {
         Schema::create('service_orders', function (Blueprint $table) {
-            $table->increments('id_service_orders');
+            $table->increments('id');
+            $table->integer('ordem_servico');
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_parts');
 

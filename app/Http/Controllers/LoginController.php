@@ -47,10 +47,11 @@ class LoginController extends Controller
                 }
             }
 
-            $regs = DB::table('service_orders')      
+            $regs = DB::table('service_orders')
+                    ->where('service_orders.id_user', '=', auth()->user()->id)   
                     ->join('users', 'users.id', '=', 'service_orders.id_user')
-                    ->join('parts', 'users.id', '=', 'service_orders.id_parts')
-                    ->select('service_orders.id_service_orders', 'parts.part_name', 'parts.price')
+                    ->join('parts', 'parts.id', '=', 'service_orders.id_parts')
+                    ->select('service_orders.id', 'service_orders.ordem_servico' ,'parts.part_name', 'parts.price')
                     ->get();
 
 
