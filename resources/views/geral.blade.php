@@ -118,6 +118,7 @@
     
         <ul class="collapsible ordemServico">
             <li>
+            @for ($i = 1; $i < $qtos; $i++)
             <div class="collapsible-header"><i class="material-icons">traffic</i>Ordem de Serviço</div>
             <div class="collapsible-body">
             <span>
@@ -161,6 +162,7 @@
             </li>
 
         </ul>
+        @endfor
 
     </div>
 

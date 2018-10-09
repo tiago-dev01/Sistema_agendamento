@@ -53,9 +53,14 @@ class LoginController extends Controller
                     ->join('parts', 'parts.id', '=', 'service_orders.id_parts')
                     ->select('service_orders.id', 'service_orders.ordem_servico' ,'parts.part_name', 'parts.price')
                     ->get();
+            
+            $qtos = DB::table('service_orders')
+                    ->where('service_orders.id_user', '=', auth()->user()->id)   
+                    ->distinct('service_orders.ordem_servico')
+                    ->count('service_orders.ordem_servico');
 
 
-            return view('geral', ['regs' => $regs])->with(compact('registros'));
+            return view('geral', ['regs' => $regs])->with(compact('registros','qtos'));
                                 
 
     }
