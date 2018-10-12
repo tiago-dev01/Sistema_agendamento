@@ -32,3 +32,5 @@ Route::post('/agendamento/gravar',['as'=>'agendar', 'uses'=>'LoginController@Sal
 Route::get('/',['as'=>'start','uses'=>'LoginController@index'])->middleware('auth');
 Route::get('/',['as'=>'start','uses'=>'LoginController@index'])->middleware('auth');
 
+Route::get('/consultar/{id?}',['as'=>'consultar.ordem','uses'=>'LoginController@index'])->middleware('auth');
+

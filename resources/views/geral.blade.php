@@ -14,6 +14,7 @@
         width: auto;
 	}
 
+
     .container {
          width: 400px;
          height: auto;
@@ -51,12 +52,13 @@
         background:#fff;
     }
 
-    .ordemServico,.pos{
+    .ordemServico,.pos,.btn{
         margin-top:50px;
     }
 
-
-
+    .btn{
+        width:200px;
+    }
 
 </style>
 
@@ -74,8 +76,8 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s4"><a class="active" href="#test1">Agendamentos</a></li>
-        <li class="tab col s4"><a href="#test2">Ordem de Serviço</a></li>
+        <li class="tab col s4"><a href="#test1">Agendamentos</a></li>
+        <li class="tab col s4"><a class="active" href="#test2">Ordem de Serviço</a></li>
         <li class="tab col s4"><a href="#test3">Nota Fiscal dos Serviços</a></li>
       </ul>
     </div>
@@ -114,11 +116,25 @@
 
 
     <div id="test2" class="col s12">
+        
+        <li class="collection-header center">
+                <h5>Selecione uma ordem de serviço, para poder visualizar os detalhes logo abaixo: </h5>
+        </li>
 
-    
+
+        <!-- Dropdown Trigger -->
+        <div class='center'> 
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Selecione</a>
+        </div>
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+        @foreach($qtos as $key => $qtreg)
+            <li><a href="{{ route('consultar.ordem',$qtreg->ordem_servico) }}"><i class="material-icons">content_paste</i>OS:{{$qtreg->ordem_servico}}</a></li>
+        @endforeach
+        </ul>
+
         <ul class="collapsible ordemServico">
             <li>
-            @for ($i = 1; $i < $qtos; $i++)
             <div class="collapsible-header"><i class="material-icons">traffic</i>Ordem de Serviço</div>
             <div class="collapsible-body">
             <span>
@@ -126,43 +142,37 @@
                 <table class="highlight">
                     <thead>
                     <tr>
-                        <th>Id_OS</th>
+                        <th>Código OS</th>
                         <th>Nome do Item</th>
                         <th>Preço por Item</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    
-                    @foreach($regs as $key => $data)
 
-                        <tr>
-                            <td>{{ $data->ordem_servico }}</td>
-                            <td>{{ $data->part_name }}</td>
-                            <td>{{ $data->price }}</td>
-                        </tr>
+                        <li class="collection-header right">
+                            <h5>Última atualização: {{$lastupdate}}</h5>
+                        </li>
 
-                    @endforeach
+                        @foreach($cos as $key => $data)
 
+                            <tr>
+                                <td>{{ $data->ordem_servico }}</td>
+                                <td>{{ $data->part_name }}</td>
+                                <td>{{ $data->price }}</td>
+                            </tr>
+
+                        @endforeach
                     </tbody>
                 </table>
 
                 <p></p>
 
-                <!-- Dropdown Trigger -->
-                <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Opções</a>
-
-                <!-- Dropdown Structure -->
-                <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="#!"><i class="material-icons">view_module</i>Gerar PDF</a></li>
-                    <li><a href="#!"><i class="material-icons">cloud</i>Pagamento</a></li>
-                </ul>
             
             </span> </div>
             </li>
 
         </ul>
-        @endfor
 
     </div>
 
