@@ -36,7 +36,7 @@
     <div class="container">
       <div class="card white">
         <div class="card-content black-text">
-          <span class="card-title center">Registre uma data: </span>
+          <span class="card-title center">Agende uma data: </span>
           
           <p class="center">Insira abaixo a data de preferência, para comparecer a autorizada mais próxima: </p>
         </div>

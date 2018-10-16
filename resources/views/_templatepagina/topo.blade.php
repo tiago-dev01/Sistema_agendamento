@@ -43,7 +43,6 @@
                     @else
                     <li><a href="{{ route('create_user') }}"><i class="material-icons">arrow_upward</i></a></li>    
                     @endif
-                <li><a href="{{route('agendamento')}}"><i class="material-icons">event</i></a></li>
                 <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
                 <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
             </ul>

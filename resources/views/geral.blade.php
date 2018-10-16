@@ -86,9 +86,9 @@
 
     <ul class="collection with-header pos">
              <li class="collection-header center">
-                <h5>Seus agendamentos estão disponíveis para consulta, logo abaixo: </h5>
+                <h5>Seus agendamentos estão disponíveis para consulta, logo abaixo: <td><a href="agendamento" class="secondary-content center"><i class="material-icons">add_circle_outline</i></a></td></h5>              
             </li>
-            
+
             <table class="highlight">
                     <thead>
                     <tr>
@@ -129,7 +129,7 @@
         <!-- Dropdown Structure -->
         <ul id='dropdown1' class='dropdown-content'>
         @foreach($qtos as $key => $qtreg)
-            <li><a href="{{ route('consultar.ordem',$qtreg->ordem_servico) }}"><i class="material-icons">content_paste</i>OS:{{$qtreg->ordem_servico}}</a></li>
+            <li><a href="{{ route('consultar.ordem',$qtreg->ordem_servico) }}"><i class="material-icons">content_paste</i>Ordem_Serv: {{$qtreg->ordem_servico}}</a></li>
         @endforeach
         </ul>
 
@@ -178,7 +178,7 @@
 
 
     <div id="test3" class="col s12">
-
+        
     </div>
 
 
