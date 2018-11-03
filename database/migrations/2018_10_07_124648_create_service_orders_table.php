@@ -15,9 +15,9 @@ class CreateServiceOrdersTable extends Migration
     {
         Schema::create('service_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ordem_servico');
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('id_parts');
+            $table->uuid('ordem_servicoID');
+            $table->unsignedInteger('id_user')->nullable()->unsigned();
+            $table->unsignedInteger('id_parts')->nullable()->unsigned();
 
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_parts')->references('id')->on('parts');

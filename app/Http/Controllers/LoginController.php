@@ -50,23 +50,23 @@ class LoginController extends Controller
         
             $qtos = DB::table('service_orders')
                     ->where('service_orders.id_user', '=', auth()->user()->id)   
-                    ->distinct('service_orders.ordem_servico')
-                    ->select('service_orders.ordem_servico')->get();
+                    ->distinct('service_orders.ordem_servicoID')
+                    ->select('service_orders.ordem_servicoID')->get();
                     //->count('service_orders.ordem_servico');
 
             $cos = DB::table('service_orders')
                 ->where([
                     ['service_orders.id_user', '=', auth()->user()->id],
-                    ['service_orders.ordem_servico','=',$id]
+                    ['service_orders.ordem_servicoID','=',$id]
                 ])   
                 ->join('users', 'users.id', '=', 'service_orders.id_user')
                 ->join('parts', 'parts.id', '=', 'service_orders.id_parts')
-                ->select('service_orders.id', 'service_orders.ordem_servico' ,'parts.part_name', 'parts.price', 'service_orders.updated_at')
+                ->select('service_orders.id', 'service_orders.ordem_servicoID' ,'parts.part_name', 'parts.price', 'service_orders.updated_at')
                 ->get();
             
 
             $lastupdate = DB::table('service_orders')
-                            ->where('service_orders.ordem_servico','=',$id)
+                            ->where('service_orders.ordem_servicoID','=',$id)
                             ->max('updated_at');
 
          

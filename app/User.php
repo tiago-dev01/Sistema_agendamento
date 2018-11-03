@@ -12,7 +12,7 @@ class User extends Authenticatable
     const ADMIN_TYPE = 'admin';
     const DEFAULT_TYPE = 'default';
     public function isAdmin()    {        
-        return $this->type === self::ADMIN_TYPE;    
+        return $this->perfil === self::ADMIN_TYPE;    //perfil é igual nome da coluna da tabela users
     }
 
     /**
