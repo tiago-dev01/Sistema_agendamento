@@ -71,4 +71,29 @@
             </div>
         </div>
 
+        <div class="col m6 s12">
+            <div class="card">
+                <div class="card-content">
+                <span class="card-title">Updates</span>
+                <ul class="badge-updates">
+                    <li>
+                    <span class="new badge red" data-badge-caption="refund"></span>
+                    <span class="message">45$ refunded to Alan Chang</span>
+                    <span class="time">14 minutes ago</span>
+                    </li>
+                    <li>
+                    <span class="new badge green" data-badge-caption="purchase"></span>
+                    <span class="message">45$ from Alan Chang</span>
+                    <span class="time">14 minutes ago</span>
+                    </li>
+                    <li>
+                    <span class="new badge red" data-badge-caption="refund"></span>
+                    <span class="message">45$ refunded to Alan Chang</span>
+                    <span class="time">14 minutes ago</span>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+
 @endsection

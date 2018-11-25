@@ -228,10 +228,10 @@
 
         <!-- Dropdown Trigger -->
         <div class='center'> 
-            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Selecione</a>
+            <a class='dropdown-trgg btn' href='#' data-target='dropdown2'>Selecione</a>
         </div>
         <!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
+        <ul id='dropdown2' class='dropdown-content'>
         @foreach($qtos as $key => $qtreg)
             <li><a href="{{ route('consultar.ordem',$qtreg->ordem_servicoID) }}"><i class="material-icons">content_paste</i>Ordem_Serv: {{$qtreg->ordem_servicoID}}</a></li>
         @endforeach
@@ -311,7 +311,7 @@
         });
 
         $(document).ready(function(){
-             $('.dropdown-trigger').dropdown();
+             $('.dropdown-trgg').dropdown();
         });
 
         $(document).ready(function(){

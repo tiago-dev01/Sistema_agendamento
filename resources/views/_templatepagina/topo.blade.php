@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html>
     <head>
         
@@ -8,13 +7,15 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                height: 100vh;
+                font-family: 'Asap', serif;
+                height: 50vh;
                 margin: 0;
             }
+            .nav-wrapper {
+                background-color: #DCD6C1 !important;
+            }
     </style>
-        
-        
+          
         <title>@yield('titulo')</title>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,7 +27,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet" type="text/css">
 
     </head>
 
@@ -34,25 +35,34 @@
 
         <header>
 
-        <nav>
-            <div class="nav-wrapper blue darken-3">
-            <a href="{{route('start')}}" class="brand-logo"><i class="material-icons"><i></i>build</i>Agendamentos de Manutenção</a>
-            <ul class="right">
-                    @if (session('status'))
-                    <li><a href="{{route('create_user')}}"><i class="material-icons">person_add</i></a></li>
-                    @else
-                    <li><a href="{{ route('create_user') }}"><i class="material-icons">arrow_upward</i></a></li>    
-                    @endif
-                <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-                <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+            <!-- Dropdown Structure -->
+            <ul id="dropdown1" class="dropdown-content">
+            
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}</a></li>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+            </form>
+
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">three</a></li>
             </ul>
+            <nav>
+            <div class="nav-wrapper">
+                <a href="{{route('start')}}" class="brand-logo left"><i class="material-icons"><i></i>build</i>Agendamentos de Manutenção</a>
+                <ul class="right">
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
             </div>
-        </nav>
+            </nav>
 
-        <ul class="sidenav" id="mobile">
-            <li><a href="/">Home</a></li>
-
-        </ul>
+            <ul class="sidenav" id="mobile">
+                <li><a href="/">Home</a></li>
+            </ul>
 
         </header>
 

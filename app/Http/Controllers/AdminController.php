@@ -8,6 +8,7 @@ use app\User;
 use App\Parts;
 use App\ServiceOrder;
 use App\CodigoServico;
+use DB;
 
 class AdminController extends Controller
 {
@@ -93,6 +94,24 @@ class AdminController extends Controller
         $ordserv = ServiceOrder::all()->groupby('ordem_servicoID');
 
         return view('/ordservico/ordemservico')->with(compact('ordserv'));
+    }
+
+    public function editarOrdemServico($id)
+    {
+
+        $editarOrdem = DB::table('service_orders')
+                                ->where([
+                                    ['service_orders.ordem_servicoID','=',$id]
+                                ])   
+                                ->join('users', 'users.id', '=', 'service_orders.id_user')
+                                ->select('service_orders.ordem_servicoID', 'users.name' ,'users.email', 'service_orders.id_parts')
+                                ->get();
+
+        $retparts = Parts::all();
+
+        return view('/ordservico/editar_ordemservico')->with(compact('editarOrdem','retparts'));
+
+
     }
 
 }

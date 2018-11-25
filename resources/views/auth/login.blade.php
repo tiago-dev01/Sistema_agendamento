@@ -2,74 +2,58 @@
 
 @section('content')
 
-<style type="text/css">
 
-</style>
+<link rel="stylesheet" href="{{ asset( elixir('css/admin-materialize.min.css') ) }}" charset="utf-8">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">{{ __('Login') }}</div>
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
-                                        @csrf
+<div class="container">
+  <div class="row">
+    <div class="col s6 offset-s7">
 
-                                    <div class="form-group row">
-                                        <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+      <div class="card card-login">
 
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+        <img  src="{{ asset('storage/veiculo_mecanica.png') }}" alt="" height="250"  >
+        
+        <div class="card-content">
 
-                                            @if ($errors->has('email'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('email') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
+          <span class="card-title">Log In</span>
 
-                                    <div class="form-group row">
-                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+          <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+            @csrf
 
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+            <div class="input-field">
 
-                                            @if ($errors->has('password'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('password') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
+              <input id="email" type="text" class="validate" name="email" required autofocus>
+              <label for="email" class="">email</label>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-6 offset-md-4">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                                <label class="form-check-label" for="remember">
-                                                    {{ __('Remember Me') }}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-0">
-                                        <div class="col-md-8 offset-md-4">
-                                            <button type="submit" class="btn btn-primary">
-                                                {{ __('Login') }}
-                                            </button>
-
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            
+            <div class="input-field">
+
+              <input id="password" type="password" class="validate" name="password" required>
+              <label for="password" class="">senha</label>
+
+            </div>
+           
+
+            <a href="{{ route('password.request') }}">Forgot Password?</a>
+
+            <br><br>
+            <div>
+              <input class="btn right" type="submit" value="Log In">
+              <a href="#!" class="btn-flat">Back</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
 @endsection
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>

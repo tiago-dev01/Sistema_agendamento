@@ -3,3 +3,4 @@
 @yield('conteudo')
 
 @include('_templatepagina.footer')
+
