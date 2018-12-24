@@ -13,20 +13,28 @@
         text-align: bottom;
     }
 
+    .div {
+     border: 2px dotted #999; /*Definindo o estilo da borda*/
+    }    
+
 </style>
 
-    <div class="row" style="height:100px">
+    <div class="row" style="height:40px">
     </div>
 
      <input id="CheckedParts" type="hidden" value="{{ $editarOrdem->toJson() }}">
 
     <div class="row">
         <div class="col s8 offset-s2 z-depth-4">
-            <ul class="collection with-header">
+            <ul class="collection with-header div">
+            
+                <div class="right">
+                    {!! QRCode::text($editarOrdem[0]->ordem_servicoID)->svg(); !!}
+                </div>
                 
                 <li class="collection-header">
-                    
-                    <h5 class="">Ordem de Serviço (Modificação)</h5>
+                  
+                    <h5 class="">Ordem de Serviço (Atualização)</h5>
                     <p></p>
                     <div class="divider"></div>
 
@@ -53,26 +61,31 @@
 
                                 </tbody>
                             </table>  
+                        </div>
+
+                        <div class="col s4">
 
                         </div>
+
                     </div>
                 </li>
 
                 <div>
 
-                <form action="" method="post" id="form1" enctype="multipart/form-data">
+                <form action="{{route('salvar_editar.ordemservico',['id'=>$editarOrdem[0]->ordem_servicoID,'email'=>$editarOrdem[0]->email])}}" method="post" id="form1" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div style="height:50px"></div>
-                    <div class="col s1"></div>
-                    <div class="col s10" style="height:280px;overflow:auto;">
-                        <table class="highlight">
+                    <div style="height:10px"></div>
+                    
+                    <div class="col s12" style="height:400px;overflow:auto;">
+                        <table id="table_id" class="display" >
+
                             <thead>
-                            <tr>
+                                <tr>
                                     <th>Código</th>
                                     <th>Nome da Peça</th>
                                     <th>Preço</th>
-                                    <th>Ações</th>
-                            </tr>
+                                    <th>Status</th>
+                                </tr>
                             </thead>
 
                             
@@ -101,27 +114,37 @@
 
                         <div style="height:20px"></div>
 
-                        <div class="row center offset s2">
-                            <button class="btn waves-effect waves-light" type="submit" form="form1" name="action">Salvar
-                                <i class="material-icons right">send</i>
-                            </button>
+                        <div class="row">
+
+                            <div class="col s4 center">
+                                <button href="{{ URL::previous() }}" class="btn waves-effect waves-light">Voltar
+                                    <i class="material-icons right">arrow_back</i>
+                                </button>
+                            </div>
+
+                            <div class="col s3 right">
+                                <button class="btn waves-effect waves-light" type="submit" form="form1" name="action">Salvar
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+
                         </div>
                     
                 </form>
                  
                 </div>
 
-            </ul>
-            
+            </ul>          
 
         </div>
+
     </div>
 
 
 @endsection
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script>
        
         $(document).on('change', '#alluser', function(e) {
@@ -158,3 +181,5 @@
         });
 
     </script>
+
+   

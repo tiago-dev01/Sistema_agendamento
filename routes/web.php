@@ -40,5 +40,10 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/ordemservico/nova/clientes','AdminController@listarClientes')->name('listar.clientes');
     Route::get('/admin/ordemservico/nova/{id?}','AdminController@carregaCliente')->name('gerar.ordemservico');
     Route::post('/admin/ordemservico/nova/{id}/adicionaitem/{codigo}','AdminController@addParts')->name('adiciona.item');
+    Route::post('/admin/ordemservico/editar/{idu}/salvar', 'AdminController@SalvareditarOrdemServico')->name('salvar_editar.ordemservico');
 
+});
+
+Route::get('/home/tabela',function(){
+        return view('testedatatable');
 });
