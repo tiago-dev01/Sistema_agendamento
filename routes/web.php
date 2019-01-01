@@ -34,16 +34,21 @@ Route::get('/consultar/{id?}',['as'=>'consultar.ordem','uses'=>'LoginController@
 
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin', 'AdminController@admin')->name('admin');
-
     Route::get('/admin/ordemservico','AdminController@listarOrdensServico')->name('listar.os');
     Route::get('/admin/ordemservico/editar/{idu}', 'AdminController@editarOrdemServico')->name('editar_ordemservico');
     Route::get('/admin/ordemservico/nova/clientes','AdminController@listarClientes')->name('listar.clientes');
     Route::get('/admin/ordemservico/nova/{id?}','AdminController@carregaCliente')->name('gerar.ordemservico');
     Route::post('/admin/ordemservico/nova/{id}/adicionaitem/{codigo}','AdminController@addParts')->name('adiciona.item');
     Route::post('/admin/ordemservico/editar/{idu}/salvar', 'AdminController@SalvareditarOrdemServico')->name('salvar_editar.ordemservico');
+});
 
+Route::get('/admin/lercodigo', function() {
+    return view('/administrador/codigo');
 });
 
 Route::get('/home/tabela',function(){
         return view('testedatatable');
 });
+
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');

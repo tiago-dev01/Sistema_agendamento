@@ -48,6 +48,56 @@
                     </div>
                     <div class="card-action">
                         <a class="right" href="/admin/ordemservico">Consulte Ordens Serviço</a>
+
+<!-- Modal Trigger -->
+  <a class="waves-effect waves-light modal-trigger" href="#modal1">Busque pelo código</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <div class="center">
+        <canvas></canvas>
+        </div>  
+
+        <select></select>
+
+        <ul></ul>
+        <a class="waves-effect waves-light btn" id="target"><i class="material-icons left">cloud</i>Parar</a>
+        <a class="waves-effect waves-light btn" id="play"><i class="material-icons left">cloud</i>Play</a>
+        <script type="text/javascript" charset="utf-8" src="{{ asset('js/qrcodelib.js') }}"></script>
+        <script type="text/javascript" charset="utf-8" src="{{ asset('js/webcodecamjs.js') }}"></script>
+        <script type="text/javascript">
+        	
+            var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
+            var arg = {
+                resultFunction: function(result) {
+                	var aChild = document.createElement('li');
+                	aChild[txt] = result.format + ': ' + result.code;
+                    document.querySelector('body').appendChild(aChild);
+                }
+            };
+            var decoder = new WebCodeCamJS("canvas").buildSelectMenu('select', 'environment|back').init(arg).stop();
+
+        </script>
+
+        <script>
+
+            $("#target").click(function() {
+                decoder.stop();
+            });
+                
+            $("#play").click(function() {
+                decoder.play();
+            });
+
+        </script>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green">Agree</a>
+  </div>
+</div>              
+
                     </div>
                 </div>
                 </div>
@@ -97,3 +147,11 @@
         </div>
 
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+</script>
