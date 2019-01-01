@@ -60,10 +60,9 @@
 
                 <form action="{{route('adiciona.item',['id'=>$ret->id,'codigo'=>$getCodeOS->uuid])}}" method="post" id="form1" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div style="height:50px"></div>
-                    <div class="col s1"></div>
-                    <div class="col s10" style="height:280px;overflow:auto;">
-                        <table class="highlight">
+                    <div style="height:10px"></div>
+                    <div class="col s12" style="height:400px;overflow:auto;">
+                        <table id="table_id" class="highlight">
                             <thead>
                             <tr>
                                     <th>Código</th>
@@ -97,7 +96,7 @@
                         <div style="height:20px"></div>
                         <div class="row center offset s2">
                             <button class="btn waves-effect waves-light" type="submit" form="form1" name="action">Salvar
-                                <i class="material-icons right">send</i>
+                                <i class="material-icons right">save</i>
                             </button>
                         </div>
 

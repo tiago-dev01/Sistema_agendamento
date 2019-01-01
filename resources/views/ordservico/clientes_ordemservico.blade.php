@@ -34,7 +34,7 @@
             </li>
 
                 <div class="col s12">
-                <table class="highlight">
+                <table id="table_id" class="highlight">
                         <thead>
                             <tr>
                                 <th class="testId">Id</th>
@@ -49,7 +49,7 @@
                                     <td class="testId"> {{ $user['id'] }}</td>
                                     <td><p><i class="material-icons">person</i>     {{ $user['name'] }}</p></td>
                                     <td><p><i class="material-icons">email</i>    {{ $user['email'] }}</p></td>                                       
-                                    <td><a id="myCheck" onclick="alert('click event occured')" href="{{ route('gerar.ordemservico',$user->id) }}" class="secondary-content left"><i class="material-icons">send</i></a></td>
+                                    <td><a id="myCheck" onclick="alert('click event occured')" href="{{ route('gerar.ordemservico',$user->id) }}" class="secondary-content left"><i class="material-icons">content_paste</i></a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -63,7 +63,4 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<script>
 
-
-</script>

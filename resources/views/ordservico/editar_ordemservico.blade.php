@@ -14,8 +14,12 @@
     }
 
     .div {
-     border: 2px dotted #999; /*Definindo o estilo da borda*/
+        border: 2px dotted #999; /*Definindo o estilo da borda*/
     }    
+
+    .swal-overlay {
+        background-color: rgba(255,255,255,0.8);
+    }
 
 </style>
 
@@ -26,7 +30,7 @@
 
     <div class="row">
         <div class="col s8 offset-s2 z-depth-4">
-            <ul class="collection with-header div">
+            <ul class="collection with-header ">
             
                 <div class="right">
                     {!! QRCode::text($editarOrdem[0]->ordem_servicoID)->svg(); !!}
@@ -74,8 +78,7 @@
 
                 <form action="{{route('salvar_editar.ordemservico',['id'=>$editarOrdem[0]->ordem_servicoID,'email'=>$editarOrdem[0]->email])}}" method="post" id="form1" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div style="height:10px"></div>
-                    
+                    <div style="height:10px"></div>   
                     <div class="col s12" style="height:400px;overflow:auto;">
                         <table id="table_id" class="display" >
 
@@ -123,8 +126,8 @@
                             </div>
 
                             <div class="col s3 right">
-                                <button class="btn waves-effect waves-light" type="submit" form="form1" name="action">Salvar
-                                    <i class="material-icons right">send</i>
+                                <button id="btn-submit" class="btn waves-effect waves-light salvarordem" type="submit" form="form1" name="action">Salvar
+                                    <i class="material-icons right">save</i>
                                 </button>
                             </div>
 
@@ -182,4 +185,37 @@
 
     </script>
 
+         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      
+      <script>
+
+        $(document).ready(function(){
+            $('#btn-submit').on('click', function(e){
+                
+                e.preventDefault(); //cancel default action            
+                var form = $(this).parents('form');
+
+                //pop up
+                swal({
+                    title: "Ordem de Serviço",
+                    text: "Deseja salvar as alterações nessa O.S ??", 
+                    icon: "info",
+                    buttons: ["Não", "Sim"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    swal("Alterações realizadas com sucesso!!", {
+                      icon: "success",
+                      buttons: false
+                    });  
+                    setTimeout(function(){
+                      form.submit();
+                    }, 2000);                                   
+                  } 
+                });
+            });
+        });
+
+      </script>
    

@@ -155,6 +155,10 @@
         text-shadow: 0 1px 0 #fff;
     }
 
+    .swal-overlay {
+        background-color: rgba(255,255,255,0.8);
+    }
+
 </style>
 
 <div class="parallax-container">
@@ -205,7 +209,7 @@
                                 <td> {{ $registro['id'] }}</td>
                                 <td><p><i class="material-icons">date_range</i>     {{ $registro['date'] }}</p></td>
                                 <td><p><i class="material-icons">alarm_on</i>     {{ $registro['time'] }}</p></td>                           
-                                <td><a href="{{ route('agendamento.deletar',$registro->id) }}" class="secondary-content left"><i class="material-icons">delete</i></a></td>
+                                <td><a class="deletarAgendamento" href="{{ route('agendamento.deletar',$registro->id) }}" class="secondary-content left"><i class="material-icons">delete</i></a></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -326,4 +330,34 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script>
 
+        $(document).ready(function(){
+            $('.deletarAgendamento').on('click', function(e){
+                
+                e.preventDefault(); //cancel default action            
+                var href = $(this).attr('href');
+
+                //pop up
+                swal({
+                    title: "Deletar agendamento",
+                    text: "Deseja realmente deletar o agendamento ?", 
+                    icon: "info",
+                    buttons: ["Não", "Sim"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("Registro apagado com sucesso!!", {
+                        icon: "success",
+                        buttons: false
+                    });  
+                    setTimeout(function(){
+                        window.location.href = href;
+                    }, 2000);                                   
+                } 
+                });
+            });
+        });
+
+    </script>

@@ -23,6 +23,10 @@
       h4,h6 {
       color: grey;
       }
+
+      .swal-overlay {
+        background-color: rgba(255,255,255,0.8);
+      }
 </style>
 
 
@@ -58,7 +62,7 @@
                     </div>
 
                       <div class="col s4 offset-s9">
-                        <button class="btn center">Salvar</button>
+                        <button class="btn center" id="btn-submit">Salvar</button>
                         <a></a>
                       </div>
 
@@ -72,15 +76,15 @@
   </div>
 </form>
 
-    
+   
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script>
        
-          $(document).ready(function(){
+        $(document).ready(function(){
             $('.datepicker').datepicker();
         });
 
-          $(document).ready(function(){
+        $(document).ready(function(){
              $('.timepicker').timepicker();
         });
 
@@ -101,6 +105,40 @@
         $('.modal').modal();
       });
     </script>
+
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      
+      <script>
+
+        $(document).ready(function(){
+            $('#btn-submit').on('click', function(e){
+                
+                e.preventDefault(); //cancel default action            
+                var form = $(this).parents('form');
+
+                //pop up
+                swal({
+                    title: "Agendamento",
+                    text: "Deseja salvar o agendamento ??", 
+                    icon: "info",
+                    buttons: ["Não", "Sim"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    swal("Agendamento realizado com sucesso!!", {
+                      icon: "success",
+                      buttons: false
+                    });  
+                    setTimeout(function(){
+                      form.submit();
+                    }, 2000);                                   
+                  } 
+                });
+            });
+        });
+
+      </script>
 
 @endsection
 

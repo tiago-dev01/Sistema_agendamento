@@ -7,6 +7,9 @@
         border: 2px solid red;
         border-radius: 5px;
     }
+    .swal-overlay {
+        background-color: rgba(255,255,255,0.8);
+    }
 </style>
 
     <div class="row" style="height:100px">
@@ -49,7 +52,7 @@
 
             <ul id="ulos" style="overflow:auto;">
                 @foreach($ordserv as $os)
-                    <li class="collection-item" id="lios"><div>{{$os[0]->ordem_servicoID}}<a href="{{route('editar_ordemservico',['id'=>$os[0]->ordem_servicoID])}}" class="secondary-content"><i class="material-icons">cached</i></a></div></li>
+                    <li class="collection-item" id="lios"><div>{{$os[0]->ordem_servicoID}}<a href="{{route('editar_ordemservico',['id'=>$os[0]->ordem_servicoID])}}" class="secondary-content criarordemservico"><i class="material-icons">cached</i></a></div></li>
                 @endforeach
             </ul>
 
@@ -81,4 +84,32 @@
             }
         }
     }
+</script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        $('.criarordemservico').on('click', function(e){
+            
+            e.preventDefault(); //cancel default action            
+            var href = $(this).attr('href');
+
+            //pop up
+            swal({
+                title: "Editar Ordem de Serviço",
+                text: "Deseja editar essa ordem de serviço ?", 
+                icon: "info",
+                buttons: ["Não", "Sim"],
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = href;                        
+            } 
+            });
+        });
+    });
+
 </script>
