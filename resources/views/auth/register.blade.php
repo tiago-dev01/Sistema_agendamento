@@ -1,77 +1,314 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
-                        @csrf
+<style type="text/css">
+    html, body{
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #CCCCCC;
+    }
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+    h1, h2, h3, h4, h5 ,h6{
+      font-weight: 200;
+    }
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+    a{
+      text-decoration: none;
+    }
 
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    p, li, a{
+      font-size: 14px;
+    }
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    fieldset{
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+    /* GRID */
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    .twelve { width: 100%; }
+    .eleven { width: 91.53%; }
+    .ten { width: 83.06%; }
+    .nine { width: 74.6%; }
+    .eight { width: 66.13%; }
+    .seven { width: 57.66%; }
+    .six { width: 49.2%; }
+    .five { width: 40.73%; }
+    .four { width: 32.26%; }
+    .three { width: 23.8%; }
+    .two { width: 15.33%; }
+    .one { width: 6.866%; }
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+    /* COLUMNS */
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+    .col {
+      display: block;
+      float:left;
+      margin: 0 0 0 1.6%;
+    }
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    .col:first-of-type {
+      margin-left: 0;
+    }
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+    .container{
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
+    .row{
+      padding: 20px 0;
+    }
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    /* CLEARFIX */
+
+    .cf:before,
+    .cf:after {
+        content: " ";
+        display: table;
+    }
+
+    .cf:after {
+        clear: both;
+    }
+
+    .cf {
+        *zoom: 1;
+    }
+
+    .wrapper{
+      width: 100%;
+      margin: 30px 0;
+    }
+
+    /* STEPS */
+
+    .steps{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      text-align: center;
+    }
+
+
+    .steps li{
+      display: inline-block;
+      margin: 50px;
+      color: #ccc;
+      padding-bottom: 5px;
+    }
+
+    .steps li.is-active{
+      border-bottom: 1px solid #3498db;
+      color: #3498db;
+    }
+
+    /* FORM */
+
+    .form-wrapper .section{
+      padding: 0px 20px 30px 20px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      background-color: #fff;
+      opacity: 0;
+      -webkit-transform: scale(1, 0);
+      -ms-transform: scale(1, 0);
+      -o-transform: scale(1, 0);
+      transform: scale(1, 0);
+      -webkit-transform-origin: top center;
+      -moz-transform-origin: top center;
+      -ms-transform-origin: top center;
+      -o-transform-origin: top center;
+      transform-origin: top center;
+      -webkit-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      text-align: center;
+      position: absolute;
+      width: 100%;
+      min-height: 300px
+    }
+
+    .form-wrapper .section h3{
+      margin-bottom: 30px;
+    }
+
+    .form-wrapper .section.is-active{
+      opacity: 1;
+      -webkit-transform: scale(1, 1);
+      -ms-transform: scale(1, 1);
+      -o-transform: scale(1, 1);
+      transform: scale(1, 1);
+    }
+
+    .form-wrapper .button, .form-wrapper .submit{
+      background-color: #3498db;
+      display: inline-block;
+      padding: 8px 30px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px !important;
+      font-family: 'Open Sans', sans-serif !important;
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+    }
+
+    .form-wrapper .submit{
+      border: none;
+      outline: none;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    .form-wrapper input[type="text"],
+    .form-wrapper input[type="password"]{
+      display: block;
+      padding: 10px;
+      margin: 10px auto;
+      background-color: #f1f1f1;
+      border: none;
+      width: 50%;
+      outline: none;
+      font-size: 14px !important;
+      font-family: 'Open Sans', sans-serif !important;
+    }
+
+    .form-wrapper input[type="radio"]{
+      display: none;
+    }
+
+    .form-wrapper input[type="radio"] + label{
+      display: block;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 100%;
+      padding: 10px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .form-wrapper input[type="radio"] + label:before{
+      content: "✔";
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 100%;
+      background-color: #3498db;
+      color: #fff;
+      display: none;
+    }
+
+    .form-wrapper input[type="radio"]:checked + label:before{
+      display: block;
+    }
+
+    .form-wrapper input[type="radio"] + label h4{
+      margin: 15px;
+      color: #ccc;
+    }
+
+    .form-wrapper input[type="radio"]:checked + label{
+      border: 1px solid #3498db;
+    }
+
+    .form-wrapper input[type="radio"]:checked + label h4{
+      color: #3498db;
+    }
+
+</style>
+
+  <div class="container">
+    <div class="wrapper">
+      <ul class="steps">
+        <li class="is-active">Passo 1</li>
+        <li>Passo 2</li>
+        <li>Passo 3</li>
+      </ul>
+      <form class="form-wrapper" method="POST" action="{{ route('register') }}">
+        <fieldset class="section is-active">
+        <h3>PERFIL DA CONTA</h3>
+          <div class="row cf">
+            <div class="six col">
+              <input type="radio" name="typeuser[]" value="default"  id="r1" checked>
+              <label for="r1">
+                <h4>Usuário Comum</h4>
+              </label>
             </div>
-        </div>
+
+            <div class="six col">
+              <input type="radio" name="typeuser[]" value="admin"  id="r3"><label for="r3">
+                <h4>Empresarial</h4>
+              </label>
+            </div>
+          </div>
+          <div class="button">Próximo</div>        
+        </fieldset>
+
+        <fieldset class="section">
+          <h3>CRIE SUA CONTA</h3>
+          <input type="text" name="name" id="name" placeholder="Nome Pessoal ou Nome da Empresa">
+          <input type="text" name="email" id="email" placeholder="Email Pessoal ou da Empresa">
+          <div class="button">Próximo</div>
+        </fieldset>
+
+        <fieldset class="section">
+          <h3>Choose a Password</h3>
+          <input type="password" name="password" id="password" placeholder="Password">
+          <input type="password" name="password_confirmation" id="password-confirm" placeholder="Re-enter Password">
+          {{ csrf_field() }}
+          <input class="submit button" type="submit" value="Criar">
+        </fieldset>
+
+        <fieldset class="section">
+          <h3>Account Created!</h3>
+          <p>Your account has now been created.</p>
+          <div class="button">Reset Form</div>
+        </fieldset>
+
+      </form>
     </div>
-</div>
+  </div>
+
 @endsection
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".form-wrapper .button").click(function(){
+    var button = $(this);
+    var currentSection = button.parents(".section");
+    var currentSectionIndex = currentSection.index();
+    var headerSection = $('.steps li').eq(currentSectionIndex);
+    currentSection.removeClass("is-active").next().addClass("is-active");
+    headerSection.removeClass("is-active").next().addClass("is-active");
+
+    if(currentSectionIndex === 3){
+      $(document).find(".form-wrapper .section").first().addClass("is-active");
+      $(document).find(".steps li").first().addClass("is-active");
+    }
+  });
+});
+</script>
+

@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     const ADMIN_TYPE = 'admin';
     const DEFAULT_TYPE = 'default';
-    public function isAdmin()    {        
+    public function isAdmin()    {   
         return $this->perfil === self::ADMIN_TYPE;    //perfil é igual nome da coluna da tabela users
     }
 
@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'password_confirmation',
+        'name', 'email', 'perfil' ,'password', 'password_confirmation',
     ];
 
     /**

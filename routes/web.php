@@ -11,26 +11,23 @@
 |
 */
 
-Route::get('/',['as'=>'start',function () {
-    return view('geral');
-}])->middleware('auth');;
+Route::group(['middleware' => ['auth','is_default']], function () {
+    Route::get('/',['as'=>'start',function () {
+        return view('geral');
+    }]);
+    Route::get('/agendamento',['as'=>'agendamento', function() {
+        return view('agendar');
+    }]);
+    Route::post('/agendamento/gravar',['as'=>'agendar', 'uses'=>'LoginController@SalvarData']);
+    Route::get('/',['as'=>'start','uses'=>'LoginController@index']);
+    Route::get('/consultar/{id?}',['as'=>'consultar.ordem','uses'=>'LoginController@index']); 
+});
 
 Auth::routes();
 
 Route::get('/home', ['as'=>'create_user','uses'=>'HomeController@index']);
 
 Route::get('/agendamento/deletar/{id}',['as'=>'agendamento.deletar','uses'=>'LoginController@deletar']);
-
-Route::get('/agendamento',['as'=>'agendamento', function() {
-    return view('agendar');
-}])->middleware('auth');
-
-Route::post('/agendamento/gravar',['as'=>'agendar', 'uses'=>'LoginController@SalvarData'])->middleware('auth');
-
-Route::get('/',['as'=>'start','uses'=>'LoginController@index'])->middleware('auth');
-
-Route::get('/consultar/{id?}',['as'=>'consultar.ordem','uses'=>'LoginController@index'])->middleware('auth');
-
 
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin', 'AdminController@admin')->name('admin');
