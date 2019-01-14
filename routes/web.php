@@ -21,13 +21,12 @@ Route::group(['middleware' => ['auth','is_default']], function () {
     Route::post('/agendamento/gravar',['as'=>'agendar', 'uses'=>'LoginController@SalvarData']);
     Route::get('/',['as'=>'start','uses'=>'LoginController@index']);
     Route::get('/consultar/{id?}',['as'=>'consultar.ordem','uses'=>'LoginController@index']); 
+    Route::get('/agendamento/deletar/{id}',['as'=>'agendamento.deletar','uses'=>'LoginController@deletar']);
 });
 
 Auth::routes();
 
 Route::get('/home', ['as'=>'create_user','uses'=>'HomeController@index']);
-
-Route::get('/agendamento/deletar/{id}',['as'=>'agendamento.deletar','uses'=>'LoginController@deletar']);
 
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin', 'AdminController@admin')->name('admin');
@@ -37,6 +36,7 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/ordemservico/nova/{id?}','AdminController@carregaCliente')->name('gerar.ordemservico');
     Route::post('/admin/ordemservico/nova/{id}/adicionaitem/{codigo}','AdminController@addParts')->name('adiciona.item');
     Route::post('/admin/ordemservico/editar/{idu}/salvar', 'AdminController@SalvareditarOrdemServico')->name('salvar_editar.ordemservico');
+    Route::get('/admin/empresa','CompanyUser@returncompany')->name('salva.empresa');
 });
 
 Route::get('/admin/lercodigo', function() {
@@ -46,6 +46,8 @@ Route::get('/admin/lercodigo', function() {
 Route::get('/home/tabela',function(){
         return view('testedatatable');
 });
+
+Route::post('admin/empresa/create', 'CompanyUser@createcompany')->name('company.create');
 
 Route::get('sendbasicemail','MailController@basic_email');
 Route::get('sendhtmlemail','MailController@html_email');

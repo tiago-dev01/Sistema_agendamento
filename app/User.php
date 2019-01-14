@@ -36,4 +36,9 @@ class User extends Authenticatable
     public function agendar(){
         return $this->belongsTo(Agendar::class);
     }
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class);
+    }
 }

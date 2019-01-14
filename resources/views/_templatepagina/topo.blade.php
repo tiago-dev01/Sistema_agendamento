@@ -41,15 +41,17 @@
             <ul id="dropdown1" class="dropdown-content">
             
             <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
+                    document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>
                     {{ __('Logout') }}</a></li>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
             </form>
-
-            <li><a href="#!">two</a></li>
-            <li class="divider"></li>
+            
+            @if(Auth::user()->perfil == 'admin')
+                <li><a href="{{route('salva.empresa')}}"><i class="material-icons">business</i>Perfil da Empresa</a></li>
+                <li class="divider"></li>
+            @endif
             <li><a href="#!">three</a></li>
             </ul>
             <nav>
