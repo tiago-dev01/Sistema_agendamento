@@ -46,9 +46,16 @@ class CompanyUser extends Controller
 
         $registro = Company::where('id_user', '=', auth()->user()->id)->get();
 
-        $retorno_empresa = Company::where('cnpj','=',$registro[0]['cnpj'])->get();
+        if(empty($registro)){
+            return view('administrador/empresa');
+        }
 
-        return view('administrador/empresa')->with(compact('retorno_empresa'));
+        else 
+        {
+            $retorno_empresa = Company::where('cnpj','=',$registro[0]['cnpj'])->get();
+            return view('administrador/empresa')->with(compact('retorno_empresa'));
+        }
+
 
     }
 }

@@ -40,19 +40,23 @@
             <!-- Dropdown Structure -->
             <ul id="dropdown1" class="dropdown-content">
             
-            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>
-                    {{ __('Logout') }}</a></li>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-            </form>
-            
             @if(Auth::user()->perfil == 'admin')
                 <li><a href="{{route('salva.empresa')}}"><i class="material-icons">business</i>Perfil da Empresa</a></li>
                 <li class="divider"></li>
             @endif
-            <li><a href="#!">three</a></li>
+            
+            @if(Auth::user()->perfil == 'default')
+                <li><a href="#!"><i class="material-icons">account_balance</i>Procure outras oficinas</a></li>
+            @endif
+
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i>
+                {{ __('Logout') }}</a></li>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+            </form>
+
             </ul>
             <nav>
             <div class="nav-wrapper">

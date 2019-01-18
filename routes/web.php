@@ -22,6 +22,11 @@ Route::group(['middleware' => ['auth','is_default']], function () {
     Route::get('/',['as'=>'start','uses'=>'LoginController@index']);
     Route::get('/consultar/{id?}',['as'=>'consultar.ordem','uses'=>'LoginController@index']); 
     Route::get('/agendamento/deletar/{id}',['as'=>'agendamento.deletar','uses'=>'LoginController@deletar']);
+    //Route::get('/oficinas',['as'=>'oficinas', 'uses'=>'UserController@ListarOficinas']);
+    Route::get('/oficinas',['as'=>'oficinas', function() {
+        return view('empresas');
+    }]);
+    Route::post('/oficinasajax','UserController@ListarOficinas');
 });
 
 Auth::routes();

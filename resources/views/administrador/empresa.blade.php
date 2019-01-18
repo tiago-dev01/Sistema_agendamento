@@ -16,25 +16,7 @@
         width: 100%; 
     }
     h1 { font-family: Aclonica, Arial, sans-serif; }
-    p.note
-    {
-     font-family: Merriweather, Arial, sans-serif;
-     color: #FFFFFF;
-     border: solid 1px #FFFFFF;
-     background-color: #4582EC;
-     -moz-border-radius: 6px;
-     -webkit-border-radius: 6px;
-     border-radius: 6px;
-     padding: 14px 20px;
-    }
 </style>
-
-<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
-
-<div class="centerTop" style="width:50%">
-    <p class="note center">POR FAVOR, INSIRA ALGUMAS INFORMAÇÕES SOBRE SUA EMPRESA, PARA NOS CONHECERMOS MELHOR. </h4>
-</div>
-
 
 
 <div class="centerForm row">
@@ -43,29 +25,29 @@
       <div class="card-panel white">
         <div class="row">
           <div class="input-field col s12">
-            <input id="nome_fantasia" name="nome_fantasia" type="text" value="{{$retorno_empresa[0]['nome_fantasia']}}" class="" autocomplete="off">
+            <input id="nome_fantasia" name="nome_fantasia" type="text" value="{{$retorno_empresa[0]['nome_fantasia'] or ''}}" class="" autocomplete="off">
             <label for="nome_fantasia">Nome Fantasia</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input class="cnpj"  name="cnpj" id="cnpj" type="text" value="{{$retorno_empresa[0]['cnpj']}}" autocomplete="off">
+            <input class="cnpj"  name="cnpj" id="cnpj" type="text" value="{{$retorno_empresa[0]['cnpj'] or ''}}" autocomplete="off">
             <label for="cnpj">CNPJ</label>
           </div>
           <div class="input-field col s6">
-            <input class="cep" id="cep" name="cep" type="text" value="{{$retorno_empresa[0]['cep']}}" class="validate" autocomplete="off">
+            <input class="cep" id="cep" name="cep" type="text" value="{{$retorno_empresa[0]['cep'] or ''}}" class="validate" autocomplete="off">
             <label for="cep">CEP</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input class="phone_with_ddd" id="telefone" name="telefone" type="text" value="{{$retorno_empresa[0]['telefone']}}" class="validate" autocomplete="off">
+            <input class="phone_with_ddd" id="telefone" name="telefone" type="text" value="{{$retorno_empresa[0]['telefone'] or ''}}" class="validate" autocomplete="off">
             <label for="telefone">Telefone</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" name="email" type="email" value="{{$retorno_empresa[0]['email']}}" class="validate" autocomplete="off">
+            <input id="email" name="email" type="email" value="{{$retorno_empresa[0]['email'] or ''}}" class="validate" autocomplete="off">
             <label for="email">Email</label>
           </div>
           <div style="height:100px"></div> 
